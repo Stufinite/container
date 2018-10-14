@@ -1,0 +1,8 @@
+Django==1.10.4
+-e git://github.com/Stufinite/userper.git@6d31e085a648f3edd8f8375aecb685535b0aed7b#egg=userper
+curso
+cphelper
+Scrapy==1.3.0
+scrapy-djangoitem==1.1.1
+Twisted<16.7
+mysqlclient
