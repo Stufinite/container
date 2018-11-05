@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>選課小幫手 Campass</title>
+  <link rel="icon" href="{% static "stufinite/img/logo.ico" %}">
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' crossorigin='anonymous'>
+  <link rel='stylesheet' href='{% static "stufinite/css/stufinite.css" %}'>
+
+  {% block stylesheet %} {% endblock %}
+
+</head>
+
+<body>
+  <header class='header'>
+    <div class='title'>
+      <img class='logo' src='/static/stufinite/img/logo.svg'></img>
+    </div>
+
+    <div class='search'>
+      <input id='search-form' type='text' placeholder='輸入課程名稱、代碼、教師名稱或進行關鍵字搜尋'>
+    </div>
+  </header>
+
+  {% block content %} {% endblock %}
+
+  <footer>
+    <span>Copyright © 2017 All rights reserved.</span>
+    <a target="_blank" href="https://www.facebook.com/CoursePickingHelper/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+  </footer>
+
+  {% block javascript %} {% endblock %}
+</body>
+
+</html>

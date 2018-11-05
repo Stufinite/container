@@ -1,0 +1,108 @@
+.stufinite-header {
+  position: relative;
+  z-index: 10;
+  padding: 10px 32px 5px 32px;
+  width: 100%;
+  background-color: #4180B2;
+}
+
+/*裡面的所有東西*/
+
+.stufinite-inner{
+  width: 1000px;
+  margin: 0 auto;
+}
+
+/*LOGO位置*/
+.stufinite-header-logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.stufinite-header-logo img{
+  width: 128px;
+}
+
+/*切換頁面欄*/
+
+.nav_bar{
+  display: inline-block;
+  margin: 0 10px;
+}
+.nav_pills{
+  list-style-type: none;
+  margin: 0 10px;
+  padding: 0px;
+  font-size: 14.5px;
+}
+.nav_pills li{
+  display:inline;
+  border: solid #ffffff 1px;
+  background:transparent;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.nav_pills li:hover{
+  border: solid #F25F5C 1px;
+}
+.nav_pills a{
+  color: #ffffff;
+  background-color: transparent;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.nav_pills li:hover a{
+  color: #F25F5C;
+}
+
+/*搜尋欄*/
+
+.stufinite-header-search {
+  display: inline-block;
+  width: 400px;
+  vertical-align: middle;
+  text-align: center;
+}
+#search-form {
+  height: 32px;
+  width: 100%;
+  border: none;
+  box-shadow: 0px 0px 1px black;
+  color: #403F3F;
+  vertical-align: middle;
+}
+.search-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  color: #FFFFFF;
+  background: transparent;
+  vertical-align: middle;
+}
+.search-btn:hover{
+  color: #F25F5C;
+  border: solid #F25F5C 1px;
+}
+
+/*其他*/
+
+.stufinite-header-item{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.stufinite-header-item a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.stufinite-header-item a:hover{
+  color: #F25F5C;
+}
+
+.stufinite-btn{
+  padding: 3px 3px;
+  border-radius: 5px;
+}

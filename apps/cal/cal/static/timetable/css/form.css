@@ -1,0 +1,125 @@
+.stufinite-form-container {
+  position: relative;
+  left: calc(50% - 180px);
+  padding: 16px;
+  width: 360px;
+  border: 1px solid #d8dee2;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+.stufinite-form-container h1 {
+  text-align: center;
+}
+
+.stufinite-form-container a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.stufinite-form-container .type-error ul {
+  padding: 0;
+  list-style: none;
+}
+
+.stufinite-form-container .form label {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: left;
+  font-weight: lighter;
+}
+
+.stufinite-form-container .form input, .stufinite-form-container .form select {
+  padding: 4px;
+  padding: 6px 8px;
+  min-height: 34px;
+  width: 100%;
+  height: 30px;
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  border-radius: 3px;
+  background-color: #fff;
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  color: #333;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.stufinite-form-container .form button {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  height: 30px;
+  border: 0;
+  border-radius: 4px;
+  background-color: green;
+  color: #FFFFFF;
+  font-size: 13px;
+}
+
+#user-profile-cancel-btn {
+  display: none;
+  background-color: red;
+}
+
+
+/* Shared */
+
+.loginBtn {
+  position: relative;
+  box-sizing: border-box;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  border-radius: 0.2em;
+  color: #FFF;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 16px;
+  line-height: 34px;
+}
+
+.loginBtn>a {
+  color: #FFF;
+}
+
+.loginBtn:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 34px;
+  height: 100%;
+  content: "";
+}
+
+.loginBtn:focus {
+  outline: none;
+}
+
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Facebook */
+
+.loginBtn--facebook {
+  background-color: #4C69BA;
+  background-image: linear-gradient(#4C69BA, #3B55A0);
+  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  text-shadow: 0 -1px 0 #354C8C;
+}
+
+.loginBtn--facebook:hover, .loginBtn--facebook:focus {
+  background-color: #5B7BD5;
+  background-image: linear-gradient(#5B7BD5, #4864B1);
+}

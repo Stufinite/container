@@ -1,0 +1,50 @@
+<div class="ui small basic test modal">
+	<div class="ui icon header">
+	  <i class="archive icon"></i>
+	  {{ c.name }}-評比問卷
+	</div>
+	<div class="content">
+	  <div class="ui form">
+	  	{% csrf_token %}
+	  	<div class="ui icon header">
+	  		<div class="ui blue ribbon label">
+	  			<div class="">點名扣分：</div> 扣分<div class="ui star rating" data-rating="3" data-max-rating="5"></div>不扣
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">點名次數：</div> 很多<div class="ui star rating" data-rating="3" data-max-rating="5"></div>很少
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">我的分數：</div> 很低<div class="ui star rating" data-rating="3" data-max-rating="5"></div>很高
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">考試多寡：</div> 很多<div class="ui star rating" data-rating="3" data-max-rating="5"></div>很少
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">考試難度：</div> 困難<div class="ui star rating" data-rating="3" data-max-rating="5"></div>簡單
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">上課氛圍：</div>  安靜<div class="ui star rating" data-rating="3" data-max-rating="5"></div>活潑
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">知識性：</div> 很少<div class="ui star rating" data-rating="3" data-max-rating="5"></div>很多 
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">輕鬆度：</div> 很硬<div class="ui star rating" data-rating="3" data-max-rating="5"></div>輕鬆
+	  		</div>
+	  		<div class="ui blue ribbon label">
+	  			<div class="">作業量：</div> 很多<div class="ui star rating" data-rating="3" data-max-rating="5"></div>很少
+	  		</div>
+	  	</div>
+	  </div>
+	</div>
+	<div class="actions">
+	  <div class="ui red basic cancel inverted button">
+	    <i class="remove icon"></i>
+	    取消
+	  </div>
+	  <div class="ui green ok inverted button" id="questionnaire">
+	    <i class="checkmark icon botton"></i>
+	    提交
+	  </div>
+	</div>
+</div>

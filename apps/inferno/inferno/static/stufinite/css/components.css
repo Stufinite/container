@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+}
+html,
+body
+{
+  overflow-x: hidden;
+  margin: 0!important;
+  padding: 0!important;
+  min-width: 768px;
+  min-height: 100%;
+  background-color: #fff;
+}
+footer {
+  height: 40px;
+  background-color: #4180B2;
+  color: #F7F7F7;
+  text-align: center;
+  line-height: 40px;
+  margin-top: 80px;
+}
+footer a {
+  color: #F7F7F7;
+}
+.stufinite-app-container
+{
+  min-width: 768px;
+  min-height: 100%;
+  width: 100%;
+}
+.stufinite-app-content {
+  min-height: 100%;
+  width: 100%;
+}
+.stufinite-btn {
+  margin-left: 8px;
+  height: 24px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: #FFFFFF;
+  font-size: 14px;
+
+}

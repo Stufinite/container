@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static "stufinite/img/logo.ico" %}">
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' crossorigin='anonymous'>
+    <link rel="stylesheet" href={% static "bower_components/semantic/dist/semantic.min.css" %}>
+    <link rel='stylesheet' href='{% static "stufinite/css/stufinite.css" %}'> 
+    {% block stylesheet %} {% endblock %}
+
+    <title>選課小幫手 Campass</title>
+</head>
+
+<body>
+	<header class="ui blue inverted stackable container menu">
+    <div class="item">
+        <img src='{% static "stufinite/img/logo.svg" %}' alt="LOGO">
+    </div>
+		<a href="http://www.campass.com.tw/" class="item">課表</a>
+		<a href="/infernoWeb/sloth?school=nchu&start=1" class="item">心得</a>
+		<a href="/infernoWeb/arrogant?start=1" class="item">職缺</a>
+		<div class="ui category search item" id="search">
+			<div class="ui transparent icon input">
+				<input class="prompt" id='search-form' type="text" placeholder="輸入課程名稱、教師、職缺或公司名稱進行搜尋" >
+        		<i class="search link icon"></i>
+			</div>
+		</div>
+    <div class="right menu">
+      <a class="item" id='fb-login-btn' href="https://www.facebook.com/v2.9/dialog/oauth?client_id=199021993947051&redirect_uri=http://login.campass.com.tw/fb?redirect_service=course"><i class="fa fa-facebook-square" aria-hidden="true"></i>登入</a>
+    </div>
+	</header>
+
+	{% block content %} {% endblock %}
+
+	<footer class="ui blue inverted stackable container segment">
+		<span>Copyright © 2016 All rights reserved.</span>
+    <a target="_blank" href="https://www.facebook.com/CoursePickingHelper/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+  </footer>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-78099072-7', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  <script src={% static "bower_components/jquery/dist/jquery.min.js" %}></script>
+  <script src={% static "bower_components/semantic/dist/semantic.min.js" %}></script>
+  <script src="{% static 'infernoWeb/js/config/config.js' %}"></script>  
+  <script type="text/javascript">
+      function getCookie(name) {
+              //name should be 'csrftoken', as an argument to be sent into getCookie()
+             var cookieValue = null;
+             if (document.cookie && document.cookie != '') {
+                 var cookies = document.cookie.split(';');
+                 for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                         break;
+                     }
+                 }
+             }
+             return cookieValue;
+      }
+      (function main() {
+        let loginUrl = "http://login.campass.com.tw"
+        $.ajax({
+          url: loginUrl + '/fb/user',
+          dataType: 'json',
+          xhrFields: {
+            withCredentials: true
+          },
+          success: (res) => {
+            $('#fb-login-btn').html('<i class="fa fa-facebook-square" aria-hidden="true"></i>登出').attr('href', loginUrl + '/fb/logout?redirect_service=www');
+          },
+          error: (res) => {
+            // User is not logged in
+          }
+        }); 
+      })();
+      $(document).ready(function(){
+          function search(){
+              $('#courseList').empty()
+              urlpattern = "{{urlpattern|escapejs}}"
+              school = "{{school|escapejs}}"
+              
+              keyword = $('#search-form').val();
+              qrystr = `keyword=${keyword}`
+              window.location.href = `${urlpattern}?${qrystr}&school=${school}`
+          }
+          $('.search.link.icon').click(function(){
+              search()
+          })
+
+          $("#search-form").keyup(function(event){
+              if(event.keyCode == 13 || event.which == 13){
+                  search()
+              }
+          });
+      })
+  </script>
+  {% block javascript %}
+  {% endblock %}
+  </body>
+</html>

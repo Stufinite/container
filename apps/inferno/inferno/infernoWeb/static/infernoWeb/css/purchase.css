@@ -1,0 +1,163 @@
+.main{
+  width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+  background: #DEDEDE;
+}
+#shopInfo img{
+  padding: 5px;
+  border: 1px #999999 solid;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+.dishInfo img{
+  max-width: 300px;
+  padding: 5px;
+  border: 1px #999999 solid;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+.order{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #4180B2;
+  text-decoration: none;
+  color: #ffffff;
+}
+.perchase-side{
+  float:left;
+  width:15%;
+　 height:900px;
+  padding: 0px auto;
+  background-color:#FFECC9;
+  margin:0px auto;
+}
+.purchase-name{
+  text-align: center;
+  border-style:solid;
+  padding: 10px 0px 10px 0px;
+}
+.purchase-food{
+  text-align: center;
+  height:450px;
+  border-left-style:solid;
+  border-right-style:solid;
+  padding: 10px 0px 10px 0px;
+}
+.purchase-money{
+  text-align: center;
+  border-style:solid;
+  padding: 10px 0px 10px 0px;
+}
+
+.purchase-nav
+{
+  margin-left: 15%;
+  
+  padding: 0px 8px 0px 8px;
+  width: 85%;
+  height: 40px;
+  background-color: #88B2A8;
+  box-shadow: 0px 1px 5px grey;
+}
+
+.purchase-nav-item
+{
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+}
+.purchase-nav-item a {
+  margin: 0px 4px 0px 4px;
+  color: black;
+  text-decoration: none;
+  font-size:30px;
+}
+.box-display{
+  margin-left: 15%;
+}
+.box{
+  display: inline-block;
+  clear: left;
+  background-color: #888888;
+  margin:10px 0px 0px 10px;
+  width: 150px;
+  height: 240px;
+}
+footer {
+  clear: left;
+}
+
+/*copy from w3 樣式最後要改*/
+/* The Modal (background) */
+.join_order_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.join_order_modal_content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.join_order_modal_header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.join_order_modal_body {padding: 2px 16px;}
+
+.join_order_modal_footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+

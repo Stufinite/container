@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Time2Eat{% endblock %}
+
+{% block content%}
+<div id="user_api">
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$.getJSON( "http://127.0.0.1:8000/t2e/api/order/user")
+		.done(function(json){
+			$("<h1>",{
+				text:'使用者 : '+json['User']+" 喜好的料理型態:"+ json["Ftype"]+" 最愛的菜:"+json['FDish']
+			}).appendTo("#user_api")
+			$.each(json['Order'], function(oKey, oValue){
+
+				$("<h1>",{
+					text:"時間:"+oValue['create']+" 應付金額:"+oValue['total']
+				}).appendTo("#user_api")
+				$.each(oValue['meal'], function(mKey, mValue){
+					$( "<h1>", {
+					    "class": "test",
+					    html:"<li id=''>"+ mValue[0]+":" + mValue[1] +"份 "+ "</li>" ,
+					  }).appendTo( "#user_api" );
+				})
+			})
+		})
+	})
+</script>
+{% endblock %}

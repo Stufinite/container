@@ -1,0 +1,51 @@
+{% extends "infernoWeb/inside.html" %}
+{% load static %}
+{% block insideStyleSheet %}
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.css">
+    <style>
+    .radar-chart .area {
+    fill-opacity: 0.7;
+    }
+    .radar-chart.focus .area {
+    fill-opacity: 0.3;
+    }
+    .radar-chart.focus .area.focused {
+    fill-opacity: 0.9;
+    }
+    .area.germany, .germany .circle {
+    fill: #FFD700;
+    stroke: none;
+    }
+    .area.argentina, .argentina .circle {
+    fill: #ADD8E6;
+    stroke: none;
+    }
+    </style>
+{% endblock %}
+{% block profile %}
+    <div class="ui two column grid" id='profile'>
+      {# 課程的詳細資訊 #}
+    </div>
+    <hr class="fade">
+    
+    {# 載入課程問卷 #}
+    {% include "slothWeb/questionnaire.html" %}
+    
+{% endblock %}
+{% block shopDetail %}
+
+  <button class="ui primary button" id="goquestion">參與評比該課程</button>
+  <div class="ui four item inverted menu">
+    <a class="active blue item" emotion='all'>所有留言</a>
+    <a class="blue item" emotion='neutral'>中立評論</a>
+    <a class="blue item" emotion='pos'>正面評論</a>
+    <a class="blue item" emotion='neg'>反面評論</a>
+  </div>
+{% endblock %}
+
+{% block insideJavascript %}
+    <script src={% static "bower_components/d3/d3.min.js" %}></script>
+    <script src={% static "bower_components/radar-chart-d3/src/radar-chart.min.js" %}></script>
+    <script src={% static "infernoWeb/js/slothWeb/inside.min.js" %}></script>
+{% endblock %}

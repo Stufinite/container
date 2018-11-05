@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Campass 選課小幫手2.0{% endblock %}
+{% block app_name %}Campass 選課小幫手2.0{% endblock %}
+
+{% load static %}
+{% block stylesheet %}
+<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' crossorigin='anonymous'>
+<link href='{% static "toastr/toastr.min.css" %}' rel='stylesheet'>
+
+<link rel='stylesheet' href='{% static "lib/css/radar-chart.min.css" %}'>
+
+<link rel='stylesheet' href='{% static "timetable/css/index.css" %}'>
+<link rel='stylesheet' href='{% static "timetable/css/form.css" %}'>
+{% endblock %}
+
+{% block content %}
+<div class='app-container'>
+    <div class='app-header'>
+      {% include "app-header.html" %}
+    </div>
+    <div class='app-content'>
+      {% include "course-info.html" %}
+      {% include "timetable.html" %}
+      {% include "searchbar.html" %}
+    </div>
+</div>
+{% include "login.html" %}
+{% include "userprofile.html" %}
+{% endblock %}
+
+
+{% block javascript %}
+<!--jQuery-->
+<script src={% static "jquery/dist/jquery.min.js" %}></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<!--Google analytics-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78099072-6', 'auto');
+  ga('send', 'pageview');
+</script>
+<!--Toast Notification-->
+<script src={% static "toastr/toastr.min.js" %}></script>
+<!--D3.js-->
+<script src="{% static 'lib/js/d3.v3.min.js' %}" ></script>
+<script src="{% static 'lib/js/radar-chart.min.js' %}" ></script>
+<script src="{% static 'lib/js/drawChart.js' %}" ></script>
+<!--功能主函式-->
+<script src="{% static 'timetable/js/config.js' %}"></script>
+<script src="{% static 'timetable/js/Searchbar.js' %}"></script>
+<script src="{% static 'timetable/js/Timetable.js' %}"></script>
+<script src="{% static 'timetable/js/page.js' %}"></script>
+<script src="{% static 'timetable/js/main.js' %}"></script>
+{% endblock %}

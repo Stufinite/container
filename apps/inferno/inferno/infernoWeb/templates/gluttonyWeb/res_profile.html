@@ -1,0 +1,32 @@
+{% load static %}
+
+{% block stylesheet %}
+    <link rel='stylesheet' href='{% static "infernoWeb/css/profile.css" %}'>
+{% endblock %}
+
+<div class="item">
+    <!-- pass res_id int {{res.id}} this position, then django render that page with specific restaurant -->
+    <!--
+    <a class="image" href="/infernoWeb/inside_resturant/?res_id={{res.id}}">
+    -->
+        <!-- res.avatar是餐廳物件的照片欄位，有url這個attribute會顯示相對位置 -->
+        <!-- res.avatar is imagefield of ResProf Object, which has url attribute that will be rendered into relative path -->
+        <img src="{{ res.avatar.url }}">
+    <!--    
+    </a>
+    -->
+    <div class="content">
+        <h3>{{ res.ResName }}</h3>
+        <div class="meta">
+            <p class="cinema">地址：{{ res.address }}</p>
+        </div>
+        <div class="description">
+            <p>最後預約時間：{{ res.last_reserv }}</p>
+        </div>
+        <div class="extra">
+            <div class="ui labeled button" tabindex="0">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{ res.ResLike}}　<i class="fa fa-star" aria-hidden="true"></i>{{ res.score}}
+            </div>
+        </div>
+    </div>
+</div>

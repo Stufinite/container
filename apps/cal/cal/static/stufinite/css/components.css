@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+}
+
+html {
+  margin: 0!important;
+  padding: 0!important;
+  height: 100%;
+}
+
+body {
+  margin: 0!important;
+  min-width: 460px;
+  min-height: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
+  background-color: #FAFAFA;
+}
+
+footer {
+  width: 100%;
+  height: 60px;
+  background-color: #4180B2;
+  color: #F7F7F7;
+  text-align: center;
+  line-height: 60px;
+}
+
+footer a {
+  color: #F7F7F7;
+}
+
+.app-container {
+  padding-top: 102px;
+}
+
+@media screen and (max-width: 480px) {
+  .app-container {
+    padding-top: 138px;
+  }
+}

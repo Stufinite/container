@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title> Welcome </title>
+    </head>
+    <body>
+        {{ name }}您好，驗證碼以寄到您的學校信箱~
+        <form action="" method="post">
+            {% csrf_token %}  
+            <label for="user_name">請輸入驗證碼:</label>
+            <input id="verification" type="text" name="verification">
+            <input type="submit" value="進入網站">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,9 @@
+.item img{
+	display: inline-block;
+	max-width: 300px;
+}
+
+.item .content{
+	padding: 0px 10px;
+	display: inline-block;
+}

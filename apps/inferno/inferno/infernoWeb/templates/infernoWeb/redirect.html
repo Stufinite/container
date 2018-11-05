@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block javascript %}
+    {% block insideJavascript %}
+        <script type="text/javascript">
+            window.location.href = window.location.href.replace('#_=_', '') + 'infernoWeb/sloth?school=nchu&start=1'
+        </script>
+    {% endblock %}
+{% endblock %}

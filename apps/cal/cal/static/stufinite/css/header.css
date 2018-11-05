@@ -1,0 +1,106 @@
+.header {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  -ms-flex-align: center;
+  width: 100%;
+  background-color: #4180B2;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.header>.title {
+  padding-top: 2px;
+  padding-right: 64px;
+  padding-left: 64px;
+}
+
+.header>.title>.logo {
+  height: 64px;
+}
+
+.header>.search {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  flex: 1;
+  align-items: center;
+}
+
+.header>.search>input {
+  margin: 0;
+  padding-left: 8px;
+  width: 100%;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 0px 1px black;
+  color: #403F3F;
+}
+
+.app-header {
+  position: fixed;
+  top: 70px;
+  z-index: 100;
+  width: 100%;
+  height: 32px;
+  background-color: white;
+}
+
+.app-header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-header li {
+  display: inline;
+  margin-left: 8px;
+}
+
+.app-header label {
+  height: 32px;
+  text-align: left;
+  font-weight: lighter;
+  line-height: 32px;
+}
+
+.app-header a {
+  height: 32px;
+  text-align: left;
+  font-weight: lighter;
+  line-height: 32px;
+  cursor: pointer;
+}
+
+.app-header #fb-login-btn {
+  padding: 4px;
+  border-radius: 3px;
+  background-color: #3b5998;
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    display: block;
+  }
+  .header>.title {
+    display: block;
+    padding-right: 0;
+    width: 100%;
+  }
+  .header>.search {
+    display: block;
+    margin: 0;
+    width: 100%;
+  }
+  .header>.search>input {
+    margin-bottom: 4px;
+    border-radius: 0;
+  }
+  .app-header {
+    top: 102px;
+  }
+}

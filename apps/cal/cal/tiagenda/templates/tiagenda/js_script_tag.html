@@ -1,0 +1,95 @@
+{% load staticfiles %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
+<script src="{% static 'tiagenda/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'tiagenda/toastr/toastr.js' %}"></script>
+<script src="{% static 'tiagenda/js/Tiagenda.js' %}"></script>
+<script src="{% static 'tiagenda/js/FileSaver.js' %}"></script>
+<script src="{% static 'tiagenda/js/FileSaver.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    
+    //將user的資料儲存到session裡
+    if(!{{init}})
+    {
+        init_agenda_count={{agenda_count_add}}
+        sessionStorage['init_agenda_count']=JSON.stringify(init_agenda_count)
+        init_agenda_name_count="{{file_name}}"
+        sessionStorage['init_agenda_name_count']=JSON.stringify(init_agenda_name_count)
+    }
+    window.num_of_person={{num_of_person}}
+    update_data({{agenda_count_add}},"{{file_name}}");
+    function init_demo(agenda_count){
+        demo_click(agenda_count,json_num,"demo");
+        init=0
+        td_mode=1;
+        demo_mode=1;
+    };
+    function update_data(agenda_count_add,name){
+        $.each(agenda_count_add,function(ik,iv){
+            $.each(iv,function(jk,jv){
+                agenda_count[ik][jk]+=agenda_count_add[ik][jk]
+                if(agenda_count_add[ik][jk]==0)
+                {
+                    agenda_name_count[ik][jk][name]=name+'<br>'
+                }
+            });
+        });
+        json_num+=num_of_person
+        num_of_person=0
+        init_demo(agenda_count);
+        sessionStorage['agenda_count']=JSON.stringify(agenda_count);
+        sessionStorage['agenda_name_count']=JSON.stringify(agenda_name_count);
+        sessionStorage['json_num']=json_num;
+
+    };
+    $(".clear-button").click(function()
+    {
+        $("td").html('<div><span></span></div>');
+        $("td").attr({"style":""});
+        reset();
+    });
+    function reset(){
+        $('#time-table td').empty(); //把目前的time-table清空，好讓下個年級的課程能夠乾淨的顯示
+        window.credits=0;   
+        $("#class_credit").text(window.credits);
+        window.name_of_optional_obligatory=[];  //把數過的課程清空 
+        if(demo_mode==1)
+        {
+            agenda_count=[[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0]];
+            agenda_name_count=[[{},{},{},{},{},{},{},{},{},{},{},{},{}],[{},{},{},{},{},{},{},{},{},{},{},{},{}],[{},{},{},{},{},{},{},{},{},{},{},{},{}],[{},{},{},{},{},{},{},{},{},{},{},{},{}],[{},{},{},{},{},{},{},{},{},{},{},{},{}]];
+            fileName="";
+            $('.file_name.submit1').attr("value","尚未選擇檔案");
+            $('.upload_file_name.submit1').empty();
+            $('.file.not_upload_file_name').empty();
+            window.sessionStorage.clear(); 
+            sessionStorage['init_agenda_count']=JSON.stringify(init_agenda_count)
+            sessionStorage['init_agenda_name_count']=JSON.stringify(init_agenda_name_count)
+        }      
+        else
+        {
+            modify_agenda_count=[[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0]];
+            $('.file_name.submit2').attr("value","尚未選擇檔案");
+            $('.upload_file_name.submit2').empty();
+            $('.modify_file.not_upload_file_name').empty();
+            modify_userName="";
+            modify_userDept="";
+        }
+        json_num=1;
+        obj=[];
+        files=[];
+        $('#name_box_content').attr({'style':''});
+        $('#name_box_content').html('');
+        //用localStorage.clear()才能徹底清除localstorage
+        update_data(init_agenda_count,init_agenda_name_count);
+    } 
+
+    $( "#submit_form" ).click(function() {
+        if($.trim( $('#search_name').val() ) != '')
+        {
+            $( "#target" ).submit();
+        }
+        
+    });
+});
+</script>

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Time2Eat{% endblock %} 
+
+{% block stylesheet %}
+    <link rel='stylesheet' href='{% static "infernoWeb/css/inside.css" %}'>
+{% endblock %}
+
+{% block content%}
+    <div class="container">
+        <div class="column">
+            <div id="shopInfo">{% include 'gluttonyWeb/res_profile.html' %}</div>
+            <div class="order"><a href="../purchase/?res_id={{res.id}}" class="orderBtn">訂餐</a></div>
+            <div class="shopDetail">
+                
+                <h3>菜色介紹</h3>
+                <h4>舒適的環境：</h4>
+                <p>{{res.envText}}</p>
+                <img src="{{ res.environment.url }}" alt="environment">
+                <h4>料理特色：</h4>
+                <p>{{res.featureText}}</p>
+                <img src="{{ res.feature.url }}" alt="feature">
+                {% for i in res.dish_set.all %}
+                    <img src={{i.image.url}} alt="dish">
+                {% endfor %}
+                {% for i in res.menu_set.all %}
+                  <img src={{i.image.url}} alt="list">
+                {% endfor %}
+            </div>
+            <div class="comment">
+                <h3>評論</h3>
+                <div>
+                    <form class="ui reply form">
+                        <div class="field">
+                            <textarea placeholder="新增公開留言"></textarea>
+                            <button><i class="fa fa-reply" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                    <div class="comment">
+                        <div class="customer">
+                            <img src="http://semantic-ui.com/images/avatar/small/matt.jpg">
+                        </div>
+                        <div class="cusInfo">
+                            <b>Matt</b>　<i>Today at 5:42PM</i>
+                            <div class="text">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iusto, accusamus magni nam autem sint. Eligendi nesciunt consectetur quod molestias quidem iste voluptas fuga fugiat. Totam quasi enim voluptas cupiditate.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javasript %}
+
+{% endblock %}

@@ -1,0 +1,49 @@
+.timetable {
+  display: inline-block;
+  padding: 16px;
+  width: 99%;
+  color: #403F3F;
+  vertical-align: top;
+}
+
+.timetable td {
+  margin: 0;
+  padding: 8px;
+  background-color: white;
+  text-align: center;
+}
+
+.timetable .fa-plus-square {
+  color: #DEDEDE;
+  font-size: 64px;
+}
+
+.timetable .time {
+  padding-right: 8px;
+  letter-spacing: 1px;
+}
+
+.timetable .detail {
+  position: relative;
+  left: 25%;
+  color: #222;
+}
+
+.timetable .remove {
+  position: relative;
+  left: 25%;
+  color: red;
+}
+
+.timetable .detail:hover, .timetable .remove:hover {
+  cursor: pointer;
+}
+
+.timetable .course .title {
+  display: block;
+  font-weight: bold;
+}
+
+.timetable .course .teacher, .timetable .course .location {
+  font-size: 12px;
+}

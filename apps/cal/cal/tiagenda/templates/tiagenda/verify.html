@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title> Welcome </title>
+    </head>
+    <body>
+        <form id="register_form" action="/accounts/login/" method="post">
+            {% csrf_token %}  
+            <label for="user_name">您的名字2</label>
+            <input id="name" type="text" name="name">
+            school_email:<input id="school_email" type="text" name="school_email">
+            grade:<input id="grade" type="text" name="grade">
+            passward:<input id="passward" type="text" name="passward">
+            user_email:<input id="user_email" type="text" name="user_email">
+            verification:<input id="verification" type="text" name="verification">
+            <input type="submit" value="進入網站">
+        </form>
+    </body>
+</html>

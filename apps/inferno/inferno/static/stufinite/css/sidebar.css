@@ -1,0 +1,28 @@
+.stufinite-app-sidebar-container {
+  display: inline-block;
+  width: 200px;
+  height: 100%;
+  background-color: white;
+  vertical-align: top;
+}
+.stufinite-app-sidebar {
+  margin: 0;
+  padding: 24px 16px 24px 16px;
+  min-height: 640px;
+  height: 100%;
+  box-shadow: 0px 0px 3px grey;
+  list-style: none;
+}
+.stufinite-app-sidebar li {
+  padding-left: 8px;
+  height: 48px;
+  color: #403F3F;
+  font-size: 13px;
+  line-height: 48px;
+}
+.stufinite-app-sidebar li i {
+  margin-right: 8px;
+  width: 28px;
+  text-align: center;
+  font-size: 24px;
+}

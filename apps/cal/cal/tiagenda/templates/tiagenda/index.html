@@ -1,0 +1,345 @@
+{% extends "base.html" %} {% block title %}Tiagenda{% endblock %} {% block app_name %}Tiagenda{% endblock %} {% load static %} {% block stylesheet %}
+<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' crossorigin='anonymous'>
+<link rel='stylesheet' href='{% static "timetable/toastr/toastr.css" %}'>
+<link rel='stylesheet' href='{% static "timetable/css/timetable.css" %}'>
+<link rel='stylesheet' href='{% static "timetable/css/searchbar.css" %}'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+ary = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
+];
+
+/*$.getJSON('fuck.json' )
+    .done(function( data ) {
+      
+      $.each( data.time_table, function( i1, item1 ) {
+        
+        $.each(item1.time_parsed , function( i2, item2 ) {
+        
+          $.each(item2.time , function( i3, item3 ) {
+          
+          ary[item2['day']-1][item3]=1;
+          
+          });
+        });
+      });
+    });
+*/
+</script>
+<style>
+html,
+body {
+    background-color: #D9EDF7;
+}
+
+.tiagenda-app-container {
+    min-width: 768px;
+    width: 100%;
+    padding: 0 5% 0 5%;
+}
+
+.tiagenda-app-lsidebar-container {
+    display: inline-block;
+    padding: 20px 0 16px 20px;
+    width: 200px;
+    height: 558px;
+    background-color: #D9EDF7;
+    vertical-align: top;
+}
+
+.tiagenda-app-rsidebar-container {
+    display: inline-block;
+    padding: 20px 20px 16px 0;
+    width: 250px;
+    height: 558px;
+    background-color: #D9EDF7;
+    vertical-align: top;
+}
+
+.tiagenda-app-toolbar-container {
+    box-shadow: 0px 0px 3px grey;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.tiagenda-toolbar-head {
+    position: relative;
+    display: flex;
+    padding: 0px 32px 0px 32px;
+    width: 100%;
+    background-color: #4180B2;
+    border-radius: 4px 4px 0px 0px;
+}
+
+.tiagenda-toolbar-head li {
+    padding-left: 8px;
+    height: 28px;
+    color: #403F3F;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 28px;
+}
+
+.tiagenda-toolbar-head li i {
+    margin-right: 8px;
+    width: 28px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.tiagenda-toolbar-body {
+    padding: 16px 32px 16px 32px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    list-style: none;
+}
+
+.tiagenda-toolbar-body li {
+    height: 30px;
+}
+
+.tool_button {
+    display: block;
+    margin: 10px 0 0 0;
+    background-color: #d9534f;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+}
+
+.tool_button i {
+    margin-right: 4px;
+    font-size: 18px;
+}
+
+#input_id {
+    display: block;
+    width: 100%;
+    height: 30px;
+}
+
+.timetable {
+    width: calc(99% - 450px);
+}
+</style>
+{% endblock %} {% block content %}
+<div class='tiagenda-app-container'>
+    <div class='stufinite-app-content'>
+        <section class='tiagenda-app-lsidebar-container'>
+            <ul class='tiagenda-app-toolbar-container'>
+                <ui class='tiagenda-toolbar-head'>
+                    <li><i class="fa fa-wrench"></i>Tool</li>
+                </ui>
+                <ul class='tiagenda-toolbar-body'>
+                    <li>
+                        <input type="text" id="input_id">
+                    </li>
+                    <li>
+                        <button class="tool_button" type="button" id="button_add"><i class="fa fa-plus-circle"></i>新增好友</button>
+                    </li>
+                    <li>
+                        <button class="tool_button" type="button" id="button_clear"><i class="fa fa-trash-o"></i>清除全部</button>
+                    </li>
+                    <li>
+                        <button class="tool_button" type="button" id="button_compare"><i class="fa fa-play"></i>開始比對</button>
+                    </li>
+                    <li>
+                        <p></p>
+                    </li>
+                </ul>
+            </ul>
+        </section>
+        <section class='timetable'>
+            <div id='time-table'>
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <th style='width: 4%;'></th>
+                            <th style='width: 19%;'>一</th>
+                            <th style='width: 19%;'>二</th>
+                            <th style='width: 19%;'>三</th>
+                            <th style='width: 19%;'>四</th>
+                            <th style='width: 19%;'>五</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-hour='1'>
+                            <th>
+                                <h5 class='time'>08:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                        <tr data-hour='2'>
+                            <th>
+                                <h5 class='time'>09:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                        <tr data-hour='3'>
+                            <th>
+                                <h5 class='time'>10:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                        <tr data-hour='4'>
+                            <th>
+                                <h5 class='time'>11:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                        <tr data-hour='5'>
+                            <th>
+                                <h5 class='time'>13:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                        <tr data-hour='6'>
+                            <th>
+                                <h5 class='time'>14:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                        <tr data-hour='7'>
+                            <th>
+                                <h5 class='time'>15:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                        <tr data-hour='8'>
+                            <th>
+                                <h5 class='time'>16:10</h5>
+                            </th>
+                            <td data-day='1'></td>
+                            <td data-day='2'></td>
+                            <td data-day='3'></td>
+                            <td data-day='4'></td>
+                            <td data-day='5'></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class='tiagenda-app-rsidebar-container'>
+            <ul class='tiagenda-app-toolbar-container'>
+                <ui class='tiagenda-toolbar-head'>
+                    <li><i class="fa fa-wrench"></i>Tool</li>
+                </ui>
+                <ul class='tiagenda-toolbar-body'>
+                </ul>
+            </ul>
+        </section>
+    </div>
+</div>
+<script>
+$.getJSON('http://127.0.0.1:8000/api/get/frienduser?user=root').done(function(courseid) {
+    $.each(courseid, function(i1, course_id) {
+        $.getJSON('http://127.0.0.1:8000/api/get/course/code/' + course_id).done(function(coursetime) {
+            $.each(coursetime[0].time.split(","), function(i2, course_time) {
+                for (i = 1; i < course_time.split("-").length; i++) {
+                    ary[course_time.split("-")[0] - 1][course_time.split("-")[i] - 1] = 1;
+                }
+            });
+        }).done(function() {
+            for (var i = 1; i < 6; i++) {
+                for (var j = 1; j < 9; j++) {
+                    $('tr[data-hour=' + j + '] td[data-day=' + i + ']').text(ary[i - 1][j - 1]);
+                }
+            }
+        })
+    });
+});
+$("#button_clear").click(function() {
+    $("p").text("");
+    $.getJSON('http://127.0.0.1:8000/api/get/frienduser?user=root').done(function(courseid) {
+        $.each(courseid, function(i1, course_id) {
+            $.getJSON('http://127.0.0.1:8000/api/get/course/code/' + course_id).done(function(coursetime) {
+                $.each(coursetime[0].time.split(","), function(i2, course_time) {
+                    for (i = 1; i < course_time.split("-").length; i++) {
+                        ary[course_time.split("-")[0] - 1][course_time.split("-")[i] - 1] = 1;
+                    }
+                });
+            }).done(function() {
+                for (var i = 1; i < 6; i++) {
+                    for (var j = 1; j < 9; j++) {
+                        $('tr[data-hour=' + j + '] td[data-day=' + i + ']').text(ary[i - 1][j - 1]);
+                    }
+                }
+            })
+        });
+    });
+});
+
+$("#button_add").click(function() {
+    var user_id = $("#input_id").val()
+    $("p").append(user_id);
+
+    $.getJSON('http://127.0.0.1:8000/api/get/frienduser?user=' + user_id).done(function(courseid) {
+        $.each(courseid, function(i1, course_id) {
+            $.getJSON('http://127.0.0.1:8000/api/get/course/code/' + course_id).done(function(coursetime) {
+                $.each(coursetime[0].time.split(","), function(i2, course_time) {
+                    for (i = 1; i < course_time.split("-").length; i++) {
+                        ary[course_time.split("-")[0] - 1][course_time.split("-")[i] - 1] += 1;
+                    }
+                });
+            }).done(function() {
+                for (var i = 1; i < 6; i++) {
+                    for (var j = 1; j < 9; j++) {
+                        $('tr[data-hour=' + j + '] td[data-day=' + i + ']').text(ary[i - 1][j - 1]);
+                    }
+                }
+            })
+        });
+    });
+});
+
+
+function fill_timetable(){
+    for (var i = 1; i < 6; i++) {
+        for (var j = 1; j < 9; j++) {
+                    $('tr[data-hour=' + j + '] td[data-day=' + i + ']').text(ary[i - 1][j - 1]);
+        }
+    }
+}
+</script>
+{% endblock %} {% block javascript %} {% endblock %}

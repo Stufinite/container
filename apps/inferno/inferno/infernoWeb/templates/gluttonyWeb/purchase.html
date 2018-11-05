@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+{% load static %} 
+
+{% block title %}Time2Eat{% endblock %}
+
+{% block stylesheet %}
+<link rel='stylesheet' href='{% static "infernoWeb/css/purchase.css" %}'> 
+{% endblock %}
+
+{% block content%}
+
+<div class="main">
+    <div id="shopInfo"> {% include 'infernoWeb/res_profile.html' %}</div>
+    <div id="mealSelBox">
+        {% csrf_token %}
+        {% for i in res.dish_set.all %}
+        <div class="dishInfo">
+            <!-- //這邊要加dish相關識別項-->
+            <img class="dishing" src={{i.image.url}}>
+            <!--這邊我想要餐點的ID-->
+            <span id="{{i.id}}">{{i.DishName}}</span> {{i.price}}元/份&nbsp;共
+            <select id="mealnum" onchange="dishNumSelIndexChange('{{i.id}}','{{i.DishName}}',this.options[this.selectedIndex].value,{{i.price}});" style="height:">
+                <option value="0"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>份
+        </div>
+        {% endfor %}
+    </div>
+    <div id="mealSubmitBox">
+        <button id="btnsel" class="order" onclick="checkGroup()">尋找糾團</button>
+        <p>以下為訂餐相關訊</p>
+        <!--這端css是方便我看-->
+        <style type="text/css">
+        .tbchk th {
+            min-width: 100px;
+            padding: 2px 5px;
+        }
+        
+        .tbchk {
+            text-align: center;
+        }
+        </style>
+        <table class="tbchk">
+            <thead>
+                <tr>
+                    <th>餐點名稱</th>
+                    <th>單價</th>
+                    <th>份數</th>
+                    <th>合計</th>
+                </tr>
+            </thead>
+            <tbody id="chkVal">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">總金額為<span id="totalmoney">0</span>元，所參予的糾團編號為<span id="joinGroup"></span>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <button class="order" id="submit" type="submit">提交訂單</button>
+    </div>
+</div>
+<!--這是跳group的相關model-->
+<div id="jom" class="join_order_modal">
+    <!-- Modal content -->
+    <div class="join_order_modal_content">
+        <div class="join_order_modal_header">
+            <span id="cljom" class="close" onclick="closeGroup()">&times;</span>
+            <h2>糾團訂單</h2>
+        </div>
+        <div class="join_order_modal_body">
+            <p>以下為{{ res.ResName }}的相關糾團</p>
+            <p>訂餐時段為
+                <select id="period">
+                    <option value=""></option>
+                    <option value="晚餐">晚餐</option>
+                    <option value="午餐">午餐</option>
+                </select>
+            </p>
+            <table id="order_group"></table>
+        </div>
+        <div class="join_order_modal_footer">
+            <button onclick="groupOnSel()">確定</button>
+            <button onclick="closeGroup()">取消</button>
+        </div>
+    </div>
+</div>
+<!--modal結束-->
+{% endblock %}
+
+{% block javascript %}
+<!--以下為用到的script-->
+<script type="text/javascript">
+function groupOnSel() {
+    var chkval = getSelectValue('chkGroup');
+    if (chkval['num'] === 0) {
+        alert("您上尚未選擇資料喔!");
+    } else if (chkval['num'] > 1) {
+        alert("您一次只能選擇一筆資料喔!");
+    } else {
+        //將群組代號寫到相關欄位
+        document.getElementById("joinGroup").innerHTML = chkval['chk0'];
+        //關閉群組
+        closeGroup();
+    }
+
+}
+
+
+function getSelectValue(itemname) {
+    var sel = document.getElementsByName(itemname);
+    var dictionary = {
+        num: 0
+    };
+    var count = 0;
+    for (var i = 0; i < sel.length; i++) {
+        if (sel[i].checked === true) {
+            count++;
+            dictionary['chk' + i] = sel[i].value;
+        }
+    }
+    dictionary['num'] = count;
+    return dictionary;
+}
+
+
+//check group Modal open
+function checkGroup() {
+    document.getElementById("jom").style.display = "block";
+    $.ajax({
+        url: "/t2e/api/order/join_order_list",
+        data: {},
+        type: 'get',
+        async: true,
+        dataType: 'text',
+        success: function(data) {
+            var v = JSON.parse(data);
+            var tbdocument = document.getElementById("order_group");
+            //將要長colname先定義好(這裡的名子可以用來接css)
+            var coltext = {
+                selection: "選擇",
+                createUser: "發起人",
+                period: "時段",
+                restaurant: "餐廳",
+                order_id: "訂單編號"
+            };
+            //為了增加彈性先寫出pk欄位方便使用(作為識別項)
+            var primaryKey = "order_id";
+            //新增子結點
+            var thead = document.createElement("thead");
+            var tbody = document.createElement("tbody");
+            //長頭
+            for (var key in coltext) {
+                var th = document.createElement("th");
+                //我先幫你下好class 就是上面的key 這樣到時在接css 就不會找不到
+                th.setAttribute("class", key);
+                var t = document.createTextNode(coltext[key]);
+                th.appendChild(t);
+                thead.appendChild(th);
+            }
+            thead.appendChild(document.createElement("tr"));
+            tbdocument.appendChild(thead);
+
+            for (var i = 0; i < v.length; i++) {
+                var tr = document.createElement("tr");
+                for (var key in coltext) {
+
+                    var td = document.createElement("td");
+                    var t = null;
+                    if (key === "selection") {
+                        t = document.createElement("input");
+                        t.setAttribute("type", "checkbox");
+                        t.setAttribute("name", "chkGroup");
+                        t.value = v[i][primaryKey];
+                    } else {
+                        t = document.createTextNode(v[i][key]);
+                    }
+                    td.appendChild(t);
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            tbdocument.appendChild(tbody);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
+    });
+
+}
+//關閉group modal事件
+function closeGroup() {
+    document.getElementById("jom").style.display = "none";
+    //用爛招青表
+    document.getElementById("order_group").innerHTML = "";
+}
+
+  var localDish =new Array();
+  //當份數做切換時對應事件
+  function dishNumSelIndexChange(DishId,DishName,DishNum,DishPrice){
+        //取得寵金額
+        var totalmoney =parseInt(document.getElementById("totalmoney").innerHTML);
+        //舊的份數
+        var oldDishNum = 0;
+        //新的份數轉int
+        DishNum =parseInt(DishNum);
+        //判斷是否有在原本列表中
+        var IsInDish =false;
+        //列表走訪
+        for(var i=0;i<localDish.length;i++){
+              if(localDish[i].Id===DishId) {
+                oldDishNum=localDish[i].Num;
+                localDish[i].Num=DishNum;
+                totalmoney+=(DishNum-oldDishNum)*DishPrice;
+                IsInDish =true;
+              }
+           }
+        //如果沒在列表中
+        if(!IsInDish){
+          //就把他加進去
+          localDish.push({Id:DishId,Price:DishPrice,Name:DishName,Num:DishNum});
+          //金額直接相加
+          totalmoney+=(DishNum)*DishPrice;
+          }
+       //修改確認欄位
+       //取得dom
+       var tbodyDocument = document.getElementById("chkVal");
+       var node =document.getElementById("Dish"+DishId);
+       //新增
+       //長表用
+       var dishInfo ={name:DishName,price:DishPrice,num:DishNum,totalprice:(DishPrice*DishNum)};
+       //確認下方是否有之前的欄位 有先刪除舊的
+       if(node!==null){
+          //remove dish
+          tbodyDocument.removeChild(node);
+       }
+       //長出新的
+       if(DishNum!==0)//
+       {
+          var tr =document.createElement("tr");
+          tr.setAttribute("id", "Dish"+DishId);
+          for(var key in dishInfo){
+             var td =document.createElement("td");
+             var t =document.createTextNode(dishInfo[key]);
+             td.appendChild(t);
+             tr.appendChild(td);
+          } 
+
+        tbodyDocument.appendChild(tr);
+    }
+    //更新總金額
+    document.getElementById("totalmoney").innerHTML = "" + totalmoney;
+}
+//送出按鈕確認
+$("#submit").click(function() {
+    $.ajax({
+        url: "",
+        data: {},
+        type: 'post',
+        async: false,
+        dataType: 'text',
+        success: function(data) {
+            alert(data);
+            //   location.href("../check/...");
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
+
+        //更新總金額
+        document.getElementById("totalmoney").innerHTML=""+totalmoney;
+      }
+  //送出按鈕確認
+  $("#submit").click(function(){
+                type: 'post',
+                async:false,
+                dataType:'text',
+                success:function(data)
+                {
+                },
+                error:
+                 function(xhr, ajaxOptions, thrownError){ 
+                    alert(xhr.status); 
+                    alert(thrownError); 
+                 }
+  });
+
+</script>
+
+{% endblock %}

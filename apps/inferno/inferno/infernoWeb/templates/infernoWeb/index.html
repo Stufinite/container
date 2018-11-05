@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block stylesheet %}
+
+<link rel='stylesheet' href='{% static "infernoWeb/css/index.css" %}'>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="ui centered grid" id="InfoArea">
+        <div class="row">
+
+        {# example #}
+
+        {% block navbar %}
+
+        <div class="ui vertical menu" id="kind">
+            <a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=通識">通識</a>
+            <a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=必修">必修</a>
+            <a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=選修">選修</a>
+            <a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=其他">其他</a>
+        </div>
+
+        {% endblock %}
+
+        {# example #}
+
+        {% block shopInfoBox %}
+
+            {% for s in something %}
+
+                <div class="ui cards">
+                    <div class="card">
+                        <div class="content">
+                            <a class="avatar" href="">
+                                <img class="right floated mini ui image" src="">
+                            </a>
+                            <a class="avatar" href="">
+                                <div class="header shopTitle"></div>
+                            </a>
+                            <div class="meta type">{# 課程的類型 #}</div>
+                            <div class="description" id='School_teacher'></div>
+                        </div>
+                        <div class="extra content">
+                            <span class="right floated">
+                                <i class="ui red heart outline like icon"></i>
+                                <span id='feedback_amount'></span>
+                            </span>
+                        </div>  
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        {% endblock %}
+
+        </div>
+        <div class="row">
+            <div class="ui grid">
+                <div class="three wide column"></div>
+                    <div class="ui borderless menu"></div>          
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

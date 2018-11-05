@@ -1,0 +1,107 @@
+{% extends "base.html" %} {% block title %}Time2Eat{% endblock %} {% block content%}
+<div class="pusher">
+    <p>
+        <p>
+            <div class="ui centered grid container">
+                <div class="column">
+                    <div class="ui three fluid steps">
+                        <a class="active step">
+                            <i class="food icon"></i>
+                            <div class="content">
+                                <div class="title">菜單</div>
+                                <div class="description">選擇訂購的餐點</div>
+                            </div>
+                        </a>
+                        <a class="step">
+                            <i class="users icon"></i>
+                            <div class="content">
+                                <div class="title">團購Go</div>
+                                <div class="description">等待你的朋友訂購</div>
+                            </div>
+                        </a>
+                        <a class="disabled step">
+                            <i class="info icon"></i>
+                            <div class="content">
+                                <div class="title">確定</div>
+                                <div class="description">發起人確定訂單</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ui segment">
+                        <div class="ui divided items">
+                            {% include 'infernoWeb/res_profile.html' %}
+                        </div>
+                    </div>
+                    <div class="ui four column grid">
+                      <!--form是我加的 method="post"指的是和計網教的一樣的東西，用post的方式把封包傳到伺服器端-->
+                      <!--{% csrf_token  %}是驗證post資料的來源端不是攻擊-->
+                      <form class="ui form" action="" method="post">
+                        {% csrf_token %}
+                        {% for i in res.dish_set.all %}
+                        <div class="column">
+                          <div class="ui special cards">
+                            <div class="ui fluid card">
+                              <div class="blurring dimmable fluid image">
+                                <div class="ui dimmer">
+                                  <div class="content">
+                                    <div class="center">
+                                      <h3>台中市大里區中興路二段478號</h3>
+                                      <h3>營業時間:07:00–23:00    </h3>
+                                    </div>
+                                  </div>
+                                </div>
+                                <img src={{i.image.url}}>
+                              </div>
+                              <div class="content">
+                                <div class="ui right floated primary button">
+                                  訂購 {{i.price}} 元
+                                </div>
+                                <a class="header"><h1>{{i.DishName}}</h1></a>
+                                <!-- 我新增的數量選單  麻煩你修改樣式 -->
+                                <div class="ui selection dropdown">
+                                  <input type="hidden" name={{i.DishName}}>
+                                  <i class="dropdown icon"></i>
+                                  <div class="default text">請選擇數量</div>
+                                  <div class="menu">
+                                    <div class="item" data-value="1">1</div>
+                                    <div class="item" data-value="2">2</div>
+                                    <div class="item" data-value="3">3</div>
+                                    <div class="item" data-value="4">4</div>
+                                    <div class="item" data-value="5">5</div>
+                                  </div>
+                                </div>
+                                <!-- 我新增的數量選單  麻煩你修改樣式 -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                        <!-- 選擇午餐或是晚餐 -->
+                        <div class="ui selection dropdown">
+                          <input type="hidden" name="period">
+                          <i class="dropdown icon"></i>
+                          <div class="default text">請選擇點餐時段</div>
+                          <div class="menu">
+                            <div class="item" data-value="lunch">午餐</div>
+                            <div class="item" data-value="super">晚餐</div>
+                          </div>
+                        </div>
+                        <!-- 選擇午餐或是晚餐 -->
+
+                        <button class="ui right floated primary button" id="submit" type="submit">提交訂單</button>
+                      </form>
+                      <!--form是我加的 method="post"指的是和計網教的一樣的東西，用post的方式把封包傳到伺服器端-->
+                    </div>
+                </div>
+            </div>
+        </p>
+        <p>
+</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+$('.ui.dropdown')
+.dropdown()
+;
+</script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "infernoWeb/index.html" %}
+
+{% load static %}
+
+{% block navbar %}
+<div class="two wide column">
+	<div class="ui vertical menu" id="kind">
+  		<a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=通識">通識</a>
+  		<a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=必修">必修</a>
+  		<a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=選修">選修</a>
+  		<a class="item" href="/infernoWeb/sloth?school={{school}}&start=1&ctype=其他">其他</a>
+	</div>
+</div>
+{% endblock %}
+
+{% block shopInfoBox %}
+
+	<div class="twelve wide mobie eight wide tablet six wide computer column" id="courseList"></div>
+	
+{% endblock %}
+	
+	
+
+{% block javascript %}
+    <script src={% static "infernoWeb/js/slothWeb/index.min.js" %}></script>	
+{% endblock %}

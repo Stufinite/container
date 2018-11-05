@@ -1,0 +1,72 @@
+.stufinite-app-searchbar-container {
+  position: absolute;
+  top: 107px;
+  right: -300px;
+  width: 300px;
+  height: calc(100% - 107px);
+  max-height: 600px;
+  background-color: rgba(247, 247, 247, 0.4);
+}
+.stufinite-app-searchbar-toggle {
+  position: absolute;
+  top: 0;
+  left: -38px;
+  width: 38px;
+  height: 38px;
+  border-bottom-left-radius: 3px;
+  background-color: white;
+  box-shadow: -1px 1px 2px grey;
+  text-align: center;
+  font-size: 24px;
+  line-height: 38px;
+
+}
+.stufinite-app-searchbar-toggle:hover {
+  cursor: pointer;
+}
+.stufinite-searchbar-result-container {
+  overflow-y: scroll;
+  max-height: 600px;
+  height: 100%;
+}
+.stufinite-searchbar-result {
+  margin-bottom: 31px;
+  width: 100%;
+}
+.stufinite-searchbar-title {
+  margin-bottom: 8px;
+  padding: 8px 16px 8px 16px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 1px 1px 1px  grey;
+}
+.stufinite-searchbar-result-title {
+  padding: 8px 16px 8px 16px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 1px 1px 1px  grey;
+}
+.stufinite-searchbar-result-list {
+  margin-top: 2px;
+  width: 100%;
+}
+.stufinite-searchbar-result-item {
+  margin: 8px 0px 8px 8px;
+  padding: 8px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 1px grey;
+}
+.stufinite-searchbar-result-item h4 {
+  margin: 0;
+  padding-left: 8px;
+}
+.stufinite-searchbar-result-item span {
+  display: block;
+  padding-right: 8px;
+  text-align: right;
+}
+.stufinite-searchbar-result-item .action-btn {
+  padding: 8px;
+}

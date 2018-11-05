@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Time2Eat{% endblock %}
+
+{% block stylesheet %}
+    <link rel='stylesheet' href='{% static "infernoWeb/css/index.css" %}'>
+{% endblock %}
+
+{% block content %}
+  <div id="InfoArea">
+      <ul class="nav">
+        <li><a class="nav-link" href="#">飯類</a></li>
+        <li><a class="nav-link" href="#">麵類</a></li>
+        <li><a class="nav-link" href="#">速食</a></li>
+        <li><a class="nav-link" href="#">早午餐</a></li>
+        <li><a class="nav-link" href="#">素食</a></li>
+    </ul>
+    {% for o in order %}
+    <div class="shopInfoBox">
+        <div class="thumbnail">
+            <div class="shopBoxBody">
+                <p class="shopTitle">糾團發起人:{{o.createUser.userName}}</p>
+                <p class="shopTitle">糾團店家:{{o.restaurant}}</p>
+                <p class="shopTitle">糾團時段:{{o.period}}</p>
+                <p>{{o.Type}}</p>
+                <h4>糾團開始時間:{{ o.create }}</h4>
+            </div>
+            <button onclick="location.href='./purchase/?res_id={{o.restaurant.id}}&order_id={{o.id}}'">加入糾團</button>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% for r in res %}
+    <div class="shopInfoBox">
+        <div class="thumbnail">
+            <a href="./inside_resturant/?res_id={{r.id}}"><img class="shopImg" src="{{r.avatar.url}}"></a>
+            <div class="shopBoxBody">
+                <span class="shopTitle">{{r.ResName}}</span>
+                <p>{{r.Type}}</p>
+                <h4>最後預約時間:{{ r.last_reserv }}</h4>
+                <h3><i class="fa fa fa-heart" aria-hidden="true"></i><small>{{r.ResLike}}</small>　<i class="fa fa-star" aria-hidden="true"></i>{{ r.score}}</h3>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+<!-- just demo to songsong -->
+<!-- {% block javascript %} 
+<script type="text/javascript">
+console.log({{ jsval|escapejs }});
+
+</script>
+{% endblock %} -->
