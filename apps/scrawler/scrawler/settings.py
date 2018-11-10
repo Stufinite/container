@@ -92,7 +92,7 @@ ITEM_PIPELINES = {
 import sys, os
 
 # Add absolute path of your Django application root directory
-sys.path.append('/home/deploy/websites/cal/cal')
+sys.path.append('/home/docker/code/cal/cal/')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'cal.settings'
 import django
 django.setup()

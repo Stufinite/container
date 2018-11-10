@@ -65,6 +65,7 @@ RUN virtualenv -p python3 /home/docker/code/scrawler/venv
 RUN /bin/bash -c "source /home/docker/code/scrawler/venv/bin/activate && pip install -r /home/docker/code/scrawler/requirements.txt && deactivate"
 
 EXPOSE 80
+ENV LANG=C.UTF-8
 CMD ["supervisord", "-n"]
 
 # prepare env for MongoDB
