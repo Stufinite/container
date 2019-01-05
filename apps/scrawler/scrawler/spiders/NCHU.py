@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import json
+
 import scrapy
 from scrawler.items import ScrawlerItem
 from timetable.models import Course
+
 
 class NchuSpider(scrapy.Spider):
 	name = "NCHU"
@@ -19,7 +22,7 @@ class NchuSpider(scrapy.Spider):
 		self.semester = semester
 
 	def parse(self, response):
-		def validateTmpJson(self, tmpFile):
+		def validateTmpJson(tmpFile):
 			def truncateNewLineSpace(line):
 				tmp = ""
 				for i in line:
@@ -28,20 +31,19 @@ class NchuSpider(scrapy.Spider):
 				return tmp
 			# truncate invalid char to turn it into json
 			jsonStr = ""
-			for line in f:
+			for line in tmpFile:
 				tmp = truncateNewLineSpace(line)
 				jsonStr +=tmp
 			return jsonStr
 
-		import json
 		try:
 			data = json.loads(response.text)
 		except Exception as e:
 			try:
-				data = json.loads(self.validateTmpJson(response.text, d))
+				data = json.loads(validateTmpJson(response.text))
 			except Exception as e:
-				print(e)    
-				data = json.load(open('{}.json'.format(response.url.split('?p_career=')[-1]), 'r'))
+				print(e)
+				raise e
 		json.dump(data, open('{}.json'.format(response.url.split('?p_career=')[-1]), 'w'))
 		CourseList = []
 
