@@ -147,6 +147,7 @@ with open(BASE_DIR + '/config/' + 'sessionid.txt') as f:
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_REGEX_WHITELIST = (
+    '^(http?://)www.' + DOMAIN,
     '^(https?://)www.' + DOMAIN,
     '^(https?://)localhost$',
     '(https?://)127.0.0.1'
