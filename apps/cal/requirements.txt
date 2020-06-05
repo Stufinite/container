@@ -1,4 +1,4 @@
-Django==1.10.4
+Django==1.11.29
 -e git://github.com/Stufinite/userper.git@6d31e085a648f3edd8f8375aecb685535b0aed7b#egg=userper
 curso
 cphelper==1.4
