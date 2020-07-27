@@ -21,9 +21,8 @@ class ScrawlerPipeline(object):
 
 		self.item += 1
 		self.AllJson += item['json']
-		if self.item == 3:
-			i = import2Mongo()
-			i.save2DB(self.AllJson)
+		i = import2Mongo()
+		i.save2DB(self.AllJson)
 
-			sob = BuildCurso(school='NCHU')
-			sob.BuildIndex()
+		sob = BuildCurso(school='NCHU')
+		sob.BuildIndex()

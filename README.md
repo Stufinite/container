@@ -11,6 +11,14 @@ docker run -d -p 80:80 cal
 2. run scrawler: `python3 run.py <semester: e.q. 1071>`
 3. 把學校的系所資料匯入資料庫中：`cd cal; python manage.py buildDept NCHU`
 
+### 每學期幹的事情
+
+1. run scrawler
+2. `每學期更新學期代碼`
+3. `docker restart cal`
+
+就這樣XD
+
 ### 每學期更新學期代碼
 
 1. <https://github.com/Stufinite/container/blob/45bebec416cbea2e33d6c0af87510e2fbba72be3/apps/cal/cal/static/timetable/js/page.js#L159>
