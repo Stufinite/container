@@ -1,4 +1,4 @@
-Django==1.10
+Django==2.2.24
 requests==2.11.1
 django-bower
 -e git://github.com/Stufinite/userper.git@20e8161313fb7b247f55ee6c9e4b3764740b1f98#egg=userper
